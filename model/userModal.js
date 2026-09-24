@@ -13,6 +13,17 @@ export const getAllUsers = async () => {
     return result.rows;
 };
 
+export const getUserById=async(id)=>{
+    const query="SELECT * FROM users WHERE id=$1"
+    const result=await pool.query(query,[id])
+    return result.rows[0]
+}
+export const getUserbyMail=async(email)=>{
+    const query="SELECT email FROM users WHERE email=$1"
+    const result=await pool.query(query,[email])
+    return result.rows[0]
+}
+
 export const deleteUser = async (id) => {
     const query = "DELETE FROM users WHERE id = $1 RETURNING *";
     const result = await pool.query(query, [id]);
